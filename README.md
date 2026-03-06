@@ -59,21 +59,9 @@
 
 * **目標**: 整合顯示器、按鍵控制與遊戲邏輯設計。
 * **內容**: 在 8x8 LED 矩陣上設計迷宮地圖，使用者透過鍵盤控制小紅點 (上、下、左、右) 穿越迷宮，並加入防碰撞偵測邏輯。
-
----
-
-## 如何使用 (How to Use)
-
-1. **開啟專案**: 啟動 Quartus II 13.1 Web Edition，選擇 `File -> Open Project`，開啟對應 Lab 資料夾中的 `.qpf` (Quartus Project File) 檔案。
-2. **頂層模組設定**: 確保當前欲測試的檔案（如 `clock_top.v` 或 `traffic_top.v`）已設定為 Top-Level Entity (`Ctrl + Shift + J`)。
-3. **編譯 (Compile)**: 點擊 `Start Compilation` 進行編譯與合成，確認無 Error 發生。
-4. **腳位配置 (Pin Planner)**: 若有新建專案，請參考實驗手冊或講義進行 Pin Assignment，確認 I/O 對應至 LP-2900 板上正確的 LED、七段顯示器或按鍵腳位。
-5. **燒錄 (Program)**: 使用 USB Blaster 連接 LP-2900 實驗板，開啟 Programmer 視窗，將編譯生成的 `.sof` 檔案燒錄至 FPGA 中進行硬體驗證。
-
 ---
 
 ## 設計重點筆記
-
 * **同步設計**: 所有的計數、狀態跳轉皆採用 Clock 正緣觸發 (`posedge clk`)。
 * **防彈跳處理 (Debounce)**: 在按鍵輸入 (如 Lab 06, Lab 08) 模組中，必須透過防彈跳電路過濾雜訊，避免單次按壓被誤判為多次輸入。
 * **除頻器 (Frequency Divider)**: 系統基礎頻率需透過 `freq_div.v` 進行除頻，以提供不同模組合適的時脈 (例如：人眼視覺暫留用的多工掃描高頻、跑馬燈或時鐘計數用的低頻)。
